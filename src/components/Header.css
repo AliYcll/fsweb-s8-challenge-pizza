@@ -1,0 +1,29 @@
+.header {
+  background-color: #CE2829;
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.header-logo {
+  max-width: 280px;
+  margin: 3rem auto 1.5rem;
+  display: block;
+}
+
+.header-breadcrumb {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  color: white;
+}
+
+.header-breadcrumb a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.header-breadcrumb a:hover {
+  text-decoration: underline;
+}

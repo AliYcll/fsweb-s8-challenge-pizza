@@ -1,0 +1,34 @@
+.header {
+  background-color: var(--red);
+  padding: 16px 0;
+}
+
+.header-inner {
+  max-width: 900px;   /* içerik genişliği ile eşitle */
+  margin: 0 auto;     /* ortala */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* sola hizala */
+  color: white;
+}
+
+.header-inner h1 {
+  font-family: var(--font-roboto);
+  font-weight: 700;
+  font-size: 28px;
+  margin: 0;
+}
+
+.breadcrumb {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.breadcrumb span {
+  color: white;
+}
