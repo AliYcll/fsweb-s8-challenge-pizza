@@ -1,145 +1,104 @@
 .order-container {
   max-width: 900px;
   margin: 0 auto;
-  margin-bottom: 5rem;
   padding: 2rem;
-  background: #fff;
-  font-family: var(--font-barlow);
-}
-
-.order-container h2 {
-  font-family: var(--font-roboto);
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-}
-
-.order-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  background: #fffaf6;
+  font-family: "Arial", sans-serif;
 }
 
 .order-price {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
+  margin: 0.5rem 0;
 }
 
 .order-rating {
-  display: flex;
-  gap: 0.3rem;
-  font-size: 0.9rem;
   color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
 
 .order-desc {
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #444;
   margin-bottom: 2rem;
 }
-
-/* =================== FORM BLOKLARI =================== */
 
 .option-group {
   margin-bottom: 1.5rem;
 }
 
-.option-group h3 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+.option-group input[type="text"],
+.option-group select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.order-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.size-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.size-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.size-option.selected {
+  background: #fdc913;
+  border-color: #fdc913;
   font-weight: bold;
 }
 
-.req {
-  color: var(--red);
-}
-
-.name-input {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-
-/* Boyut + Hamur yan yana */
-.order-options {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-/* boyut pill butonları */
-.size-pills {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.pill {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pill input {
-  display: none;
-}
-
-.pill.active {
-  background: var(--dark-gray);
-  color: #fff;
-  border-color: var(--dark-gray);
-}
-
-/* hamur select */
-.option-group select {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
-}
-
-/* malzemeler */
-.toppings {
-  margin-bottom: 2rem;
-}
-
 .toppings h3 {
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
 }
 
 .toppings p {
   font-size: 0.85rem;
-  color: #777;
   margin-bottom: 1rem;
+  color: #666;
 }
 
 .toppings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem 1rem;
+  gap: 0.5rem;
 }
 
-.topping-item {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.9rem;
+.topping {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.topping-item input {
-  accent-color: var(--red);
+.topping.selected {
+  background: #fdc913;
+  border-color: #fdc913;
+  font-weight: bold;
 }
 
-/* not alanı */
 .order-note {
   margin: 1.5rem 0;
 }
@@ -147,19 +106,16 @@
 .order-note input {
   width: 100%;
   padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
 }
 
-/* footer (adet + özet) */
 .order-footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 2rem;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .quantity {
@@ -169,13 +125,13 @@
 }
 
 .quantity button {
-  background: var(--yellow);
+  background: #fdc913;
   border: none;
-  font-size: 1.2rem;
   width: 40px;
   height: 40px;
+  font-size: 1.2rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .quantity span {
@@ -184,30 +140,28 @@
 }
 
 .order-summary {
-  flex: 1;
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 6px;
+  background: #fffaf6;
   font-size: 0.9rem;
 }
 
 .order-summary .total {
-  color: var(--red);
+  color: #ce2829;
   font-weight: bold;
 }
 
 .btn-submit {
-  display: block;
   width: 100%;
-  background: var(--yellow);
-  color: #000;
+  background: #fdc913;
   border: none;
   padding: 1rem;
-  margin-top: 1rem;
   font-size: 1rem;
   font-weight: bold;
-  cursor: pointer;
   border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
   transition: background 0.3s ease;
 }
 
@@ -215,9 +169,8 @@
   background: #ffdb4d;
 }
 
-/* hata mesajları */
 .error {
-  color: var(--red);
-  font-size: 14px;
-  margin-top: 6px;
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
 }
