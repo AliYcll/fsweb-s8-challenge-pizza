@@ -16,7 +16,6 @@ export default function Success() {
       <Header />
 
       <section className="success-page">
-        <h1 className="success-brand">Teknolojik Yemekler</h1>
         <p className="success-tagline">lezzetin yolda</p>
         <h2 className="success-title">SİPARİŞ ALINDI</h2>
         <hr className="success-hr" />

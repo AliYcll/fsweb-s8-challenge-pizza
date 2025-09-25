@@ -5,15 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 56px 16px 72px;
   text-align: center;
-}
-
-.success-brand {
-  font-family: var(--font-roboto);
-  font-weight: 700;
-  font-size: 40px;
-  margin-bottom: 14px;
 }
 
 .success-tagline {
@@ -60,7 +52,10 @@
   border-radius: 6px;
   padding: 18px 22px;
   width: 100%;
+  max-width: 420px;   /* taşmayı engellemek için */
+  box-sizing: border-box; /* padding + border genişliği hesaplasın */
 }
+
 
 .row {
   display: flex;
