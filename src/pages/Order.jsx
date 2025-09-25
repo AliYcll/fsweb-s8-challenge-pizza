@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import "../styles/order.css";
 
 export default function Order({ setOrderData }) {
@@ -91,7 +92,11 @@ export default function Order({ setOrderData }) {
               </div>
             </div>
             <p className="order-description">
-              Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre.
+              Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. 
+              Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel 
+              olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş 
+              mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya 
+              bazen pizzetta denir.
             </p>
           </div>
         </section>
@@ -228,6 +233,8 @@ export default function Order({ setOrderData }) {
           </form>
         </section>
       </main>
+              <Footer />
+      
     </>
   );
 }

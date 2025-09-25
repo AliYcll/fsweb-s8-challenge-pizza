@@ -1,38 +1,33 @@
 .header {
   background-color: var(--red);
   padding: 1rem;
-}
-
-.header-inner {
-  max-width: 900px;  
-  margin: 0 auto;    
   display: flex;
   flex-direction: column;
+  align-items: center;   /* logoyu ve breadcrumb’u ortalar */
+  justify-content: center;
+  text-align: center;
+}
+
+.header-logo {
+  height: auto;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.header-breadcrumb {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 6px;
+  font-size: 14px;
   color: white;
 }
 
-.header-inner h1 {
-  font-family: var(--font-roboto);
-  font-weight: 700;
-  font-size: 28px;
-  margin: 0;
-}
-
-.breadcrumb {
-  margin-top: 4px;
-  font-size: 14px;
-  display: flex;
-  justify-content: center; 
-  gap: 4px;              
-}
-
-
-.breadcrumb a {
+.header-breadcrumb a {
   color: var(--yellow);
   text-decoration: none;
 }
 
-.breadcrumb span {
+.header-breadcrumb span {
   color: white;
 }
