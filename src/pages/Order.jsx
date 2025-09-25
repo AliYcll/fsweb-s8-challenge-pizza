@@ -1,230 +1,234 @@
-import React, { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 import "../styles/order.css";
 
-export default function Order() {
+export default function Order({ setOrderData }) {
   const history = useHistory();
 
-  // sabitler
   const basePrice = 85.5;
   const toppingPrice = 5;
+
   const toppingsList = [
-    "Pepperoni", "Sosis", "Kanada Jambonu", "Tavuk Izgara", "Soğan", "Domates",
-    "Mısır", "Sucuk", "Jalepeno", "Sarımsak", "Biber", "Kabak", "Ananas"
+    "Pepperoni","Sosis","Kanada Jambonu","Tavuk Izgara","Soğan","Domates",
+    "Mısır","Jalepeno","Sucuk","Ananas","Kabak"
   ];
 
-  // form state
-  const [name, setName] = useState("");
-  const [size, setSize] = useState("");
-  const [dough, setDough] = useState("");
-  const [toppings, setToppings] = useState([]);
-  const [note, setNote] = useState("");
-  const [quantity, setQuantity] = useState(1);
-
-  // doğrulama görünürlüğü için
-  const [touched, setTouched] = useState({
-    name: false,
-    size: false,
-    dough: false,
-    toppings: false,
+  const [formData, setFormData] = useState({
+    size: "",
+    hamur: "",
+    toppings: [],
+    notes: "",
+    quantity: 1,
   });
 
-  // hesaplamalar
-  const extrasCost = useMemo(() => toppings.length * toppingPrice, [toppings]);
-  const subtotal = useMemo(() => basePrice + extrasCost, [basePrice, extrasCost]);
-  const total = useMemo(() => subtotal * quantity, [subtotal, quantity]);
+  const [errors, setErrors] = useState({});
+  const [totalPrice, setTotalPrice] = useState(basePrice);
 
-  // helpers
-  const toggleTopping = (item) => {
-    setToppings((prev) => {
-      if (prev.includes(item)) return prev.filter((t) => t !== item);
-      if (prev.length >= 10) return prev; // 10 üstü yok
-      return [...prev, item];
-    });
-  };
-
-  const changeQty = (type) => {
-    setQuantity((q) => {
-      if (type === "inc") return q + 1;
-      if (type === "dec") return q > 1 ? q - 1 : 1;
-      return q;
-    });
-  };
-
-  // doğrulama kuralları
-  const errors = {
-    name: name.trim().length < 3 ? "İsim en az 3 karakter olmalı." : "",
-    size: !size ? "Boyut seçmek zorunludur." : "",
-    dough: !dough ? "Hamur seçmek zorunludur." : "",
-    toppings:
-      toppings.length < 4
-        ? "En az 4 malzeme seçmelisin."
-        : toppings.length > 10
-        ? "En fazla 10 malzeme seçebilirsin."
-        : "",
-  };
-
-  const isValid =
-    !errors.name && !errors.size && !errors.dough && !errors.toppings;
+  useEffect(() => {
+    const total =
+      (basePrice + formData.toppings.length * toppingPrice) * formData.quantity;
+    setTotalPrice(total);
+  }, [formData.toppings, formData.quantity]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = {};
 
-    // hataları göster
-    setTouched({ name: true, size: true, dough: true, toppings: true });
+    if (!formData.size) validationErrors.size = "Pizza boyutu seçin";
+    if (!formData.hamur) validationErrors.hamur = "Hamur kalınlığı seçin";
+    if (formData.toppings.length < 4 || formData.toppings.length > 10)
+      validationErrors.toppings = "4 ile 10 arasında malzeme seçmelisiniz";
 
-    if (!isValid) return;
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
-    const order = {
-      product: "Position Absolute Acı Pizza",
-      name: name.trim(),
-      size,
-      dough,
-      toppings,
-      note,
-      quantity,
-      basePrice,
-      extrasCost,
-      total,
+    const response = {
+      ...formData,
+      totalPrice: totalPrice.toFixed(2),
+      id: Math.floor(Math.random() * 1000),
     };
+    setOrderData(response);
+    history.push("/success");
+  };
 
-    // v5: state ile yönlendir
-    history.push("/success", { order });
+  const handleQuantityChange = (operation) => {
+    if (operation === "increment") {
+      setFormData({ ...formData, quantity: formData.quantity + 1 });
+    } else if (operation === "decrement" && formData.quantity > 1) {
+      setFormData({ ...formData, quantity: formData.quantity - 1 });
+    }
   };
 
   return (
     <>
-      <Header currentPage="Sipariş Oluştur" />
+        <Header />
 
-      <main className="order-container">
-        {/* Üst bilgi / fiyat / rating */}
-        <h2>Position Absolute Acı Pizza</h2>
 
-        <div className="order-topbar">
-          <div className="order-price">{basePrice.toFixed(2)}₺</div>
-          <div className="order-rating">
-            <span>4.9</span> <span>(200)</span>
-          </div>
-        </div>
+      <main className="order-wrapper">
+        <section className="order-image">
+          <img src="images/iteration-2-images/pictures/form-banner.png" alt="pizza" />
+        </section>
 
-        <p className="order-desc">
-          Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. 
-          Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra
-          geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak,
-          düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. 
-          Küçük bir pizzaya bazen pizzetta denir.
-        </p>
+        <section className="order-details">
+          <nav className="order-breadcrumb">
+            <Link to="/">Anasayfa - </Link>
+            <HashLink smooth to="/#foods">Seçenekler -</HashLink>
+            <span aria-current="page"> Sipariş Oluştur</span>
+          </nav>
 
-        {/* İSİM */}
-        <div className="option-group">
-          <h3>İsim <span className="req">*</span></h3>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-            placeholder="Adınızı giriniz"
-            className="name-input"
-          />
-          {touched.name && errors.name && <div className="error">{errors.name}</div>}
-        </div>
-
-        {/* BOYUT + HAMUR (YAN YANA) */}
-        <div className="order-options">
-          {/* Boyut */}
-          <div className="option-group">
-            <h3>Boyut Seç <span className="req">*</span></h3>
-            <div className="size-pills">
-              {["S", "M", "L"].map((s) => (
-                <label
-                  key={s}
-                  className={`pill ${size === s ? "active" : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name="size"
-                    value={s}
-                    onChange={(e) => setSize(e.target.value)}
-                    onBlur={() => setTouched((t) => ({ ...t, size: true }))}
-                  />
-                  {s}
-                </label>
-              ))}
+          <div className="order-heading">
+            <h1 className="order-title">Position Absolute Acı Pizza</h1>
+            <div className="order-price-rating">
+              <p className="order-price">85.50₺</p>
+              <div className="order-rating">
+                <p>4.9</p>
+                <p>(200)</p>
+              </div>
             </div>
-            {touched.size && errors.size && <div className="error">{errors.size}</div>}
+            <p className="order-description">
+              Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre.
+            </p>
           </div>
+        </section>
 
-          {/* Hamur */}
-          <div className="option-group">
-            <h3>Hamur Seç <span className="req">*</span></h3>
-            <select
-              value={dough}
-              onChange={(e) => setDough(e.target.value)}
-              onBlur={() => setTouched((t) => ({ ...t, dough: true }))}
-            >
-              <option value="">—Hamur Kalınlığı Seç—</option>
-              <option value="İnce">İnce</option>
-              <option value="Normal">Normal</option>
-              <option value="Kalın">Kalın</option>
-            </select>
-            {touched.dough && errors.dough && <div className="error">{errors.dough}</div>}
-          </div>
-        </div>
+        <section className="order-form">
+          <form onSubmit={handleSubmit}>
+            {/* Boyut ve Hamur */}
+            <div className="order-size-dough">
+              <div className="order-size">
+                <h3 className="field-title">
+                  Boyut Seç <span className="required">*</span>
+                </h3>
+                <div className="radio-group">
+                  {["S", "M", "L"].map((size) => (
+                    <label key={size} className="radio-option">
+                      <input
+                        type="radio"
+                        name="size"
+                        value={size}
+                        checked={formData.size === size}
+                        onChange={(e) =>
+                          setFormData({ ...formData, size: e.target.value })
+                        }
+                      />
+                      <span>{size}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.size && <div className="error-message">{errors.size}</div>}
+              </div>
 
-        {/* MALZEMELER */}
-        <div className="toppings">
-          <h3>Ek Malzemeler</h3>
-          <p>En Fazla 10 malzeme seçebilirsiniz. {toppingPrice}₺</p>
+              <div className="order-dough">
+                <h3 className="field-title">
+                  Hamur Seç <span className="required">*</span>
+                </h3>
+                <select
+                  className="dough-select"
+                  value={formData.hamur}
+                  onChange={(e) =>
+                    setFormData({ ...formData, hamur: e.target.value })
+                  }
+                >
+                  <option value="">-- Hamur Kalınlığı Seç --</option>
+                  <option value="ince">İnce Hamur</option>
+                  <option value="orta">Orta Hamur</option>
+                  <option value="kalin">Kalın Hamur</option>
+                </select>
+                {errors.hamur && <div className="error-message">{errors.hamur}</div>}
+              </div>
+            </div>
 
-          <div className="toppings-grid">
-            {toppingsList.map((item) => (
-              <label key={item} className={`topping-item ${toppings.includes(item) ? "checked" : ""}`}>
-                <input
-                  type="checkbox"
-                  checked={toppings.includes(item)}
-                  onChange={() => toggleTopping(item)}
-                  onBlur={() => setTouched((t) => ({ ...t, toppings: true }))}
-                />
-                {item}
-              </label>
-            ))}
-          </div>
+            {/* Ek Malzemeler */}
+            <div className="order-toppings">
+              <h3 className="field-title">Ek Malzemeler</h3>
+              <p className="toppings-info">En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
+              <div className="toppings-grid">
+                {toppingsList.map((topping) => (
+                  <label key={topping} className="topping-option">
+                    <input
+                      type="checkbox"
+                      checked={formData.toppings.includes(topping)}
+                      onChange={(e) => {
+                        const newToppings = e.target.checked
+                          ? [...formData.toppings, topping]
+                          : formData.toppings.filter((t) => t !== topping);
+                        setFormData({ ...formData, toppings: newToppings });
+                      }}
+                    />
+                    <span>{topping}</span>
+                  </label>
+                ))}
+              </div>
+              {errors.toppings && (
+                <div className="error-message">{errors.toppings}</div>
+              )}
+            </div>
 
-          {touched.toppings && errors.toppings && (
-            <div className="error">{errors.toppings}</div>
-          )}
-        </div>
+            {/* Sipariş Notu */}
+            <div className="order-notes">
+              <h3 className="field-title">Sipariş Notu</h3>
+              <textarea
+                className="notes-input"
+                placeholder="Siparişine eklemek istediğin bir not var mı?"
+                value={formData.notes}
+                onChange={(e) =>
+                  setFormData({ ...formData, notes: e.target.value })
+                }
+              />
+            </div>
 
-        {/* NOT */}
-        <div className="order-note">
-          <h3>Sipariş Notu</h3>
-          <input
-            type="text"
-            placeholder="Siparişine eklemek istediğin bir not var mı?"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-        </div>
+            {/* Miktar ve Toplam */}
+            <div className="order-footer">
+              <div className="quantity-controls">
+                <button
+                  type="button"
+                  className="quantity-btn"
+                  onClick={() => handleQuantityChange("decrement")}
+                  disabled={formData.quantity <= 1}
+                >
+                  −
+                </button>
+                <div className="quantity-display">{formData.quantity}</div>
+                <button
+                  type="button"
+                  className="quantity-btn"
+                  onClick={() => handleQuantityChange("increment")}
+                >
+                  +
+                </button>
+              </div>
 
-        {/* ÖZET */}
-        <div className="order-footer">
-          <div className="quantity">
-            <button onClick={() => changeQty("dec")}>-</button>
-            <span>{quantity}</span>
-            <button onClick={() => changeQty("inc")}>+</button>
-          </div>
+              <div className="order-summary">
+                <h3>Sipariş Toplamı</h3>
+                <div className="summary-row">
+                  <span>Seçimler</span>
+                  <span>
+                    {(
+                      formData.toppings.length *
+                      toppingPrice *
+                      formData.quantity
+                    ).toFixed(2)}₺
+                  </span>
+                </div>
+                <div className="summary-row total">
+                  <span>Toplam</span>
+                  <span>{totalPrice.toFixed(2)}₺</span>
+                </div>
 
-          <div className="order-summary">
-            <p>Seçimler: <span>{extrasCost.toFixed(2)}₺</span></p>
-            <p>Toplam: <span className="total">{total.toFixed(2)}₺</span></p>
-            <button className="btn-submit" onClick={handleSubmit}>SİPARİŞ VER</button>
-          </div>
-        </div>
+                <button type="submit" className="btn-submit">
+                  SİPARİŞ VER
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
       </main>
-
-      <Footer />
     </>
   );
 }

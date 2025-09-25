@@ -1,176 +1,344 @@
-.order-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: #fffaf6;
-  font-family: "Arial", sans-serif;
-}
-
-.order-price {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-}
-
-.order-rating {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.order-desc {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-.option-group {
-  margin-bottom: 1.5rem;
-}
-
-.option-group input[type="text"],
-.option-group select {
+/* ==== Order Header ==== */
+.order-header {
   width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  background-color: #ce2829;
+  color: white;
+  padding: 1rem 1rem;
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 3rem;
+  font-family: "Londrina Solid", sans-serif;
 }
 
-.order-options {
+/* ==== Genel Wrapper ==== */
+.order-wrapper {
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.size-options {
-  display: flex;
-  gap: 1rem;
-}
-
-.size-option {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #ddd;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.order-image {
+  display: flex;
+  flex-direction: column;
+  background-color: #faf7f2;
+  align-items: center;
+  width: 100%;
+}
+
+.order-image img {
+  width: 40%;
+  margin-bottom: 50px;
+}
+
+.order-details {
+  background-color: #faf7f2;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ==== Breadcrumb ==== */
+.order-breadcrumb {
+  width: 30%;
+  font-family: Barlow, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1.5rem 0;
+  color: red;
+  margin: 10px auto;
+}
+
+.order-breadcrumb a {
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.order-breadcrumb a:hover {
+  color: #000;
+}
+
+/* ==== Başlık & İçerik ==== */
+.order-heading {
+  width: 30%;
+  margin: auto;
+}
+
+.order-title {
+  font-family: barlow, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 40px auto;
+  text-align: left;
+}
+
+.order-description {
+  font-family: barlow, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #555;
+  text-align: left;
+  margin: 40px auto;
+  line-height: 2rem;
+}
+
+/* ==== Form ==== */
+.order-form {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* ==== Boyut & Hamur ==== */
+.order-size-dough {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.order-size,
+.order-dough {
+  flex: 1;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-option input[type="radio"] {
+  display: none;
+}
+
+.radio-option span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background-color: #faf7f2;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-.size-option.selected {
-  background: #fdc913;
+.radio-option input[type="radio"]:checked + span {
+  background-color: #fdc913;
   border-color: #fdc913;
-  font-weight: bold;
+  color: #000;
 }
 
-.toppings h3 {
-  margin-bottom: 0.25rem;
+.radio-option span:hover {
+  border-color: #fdc913;
 }
 
-.toppings p {
-  font-size: 0.85rem;
-  margin-bottom: 1rem;
+.dough-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+/* ==== Ek Malzemeler ==== */
+.order-toppings {
+  margin-bottom: 30px;
+}
+
+.toppings-info {
+  font-size: 14px;
   color: #666;
+  margin-bottom: 15px;
 }
 
 .toppings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 12px;
 }
 
-.topping {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  text-align: center;
+.topping-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.topping.selected {
-  background: #fdc913;
+.topping-option input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background-color: #faf7f2;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.topping-option input:checked {
+  background-color: #fdc913;
   border-color: #fdc913;
+}
+
+.topping-option input:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 16px;
+  color: black;
   font-weight: bold;
 }
 
-.order-note {
-  margin: 1.5rem 0;
-}
-
-.order-note input {
+/* ==== Not ==== */
+.notes-input {
   width: 100%;
-  padding: 0.6rem;
+  min-height: 80px;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  background-color: #f8f8f8;
 }
 
+.notes-input::placeholder {
+  color: #999;
+}
+
+/* ==== Footer (Miktar + Toplam) ==== */
 .order-footer {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  gap: 1rem;
+  gap: 20px;
+  margin: 30px 0;
 }
 
-.quantity {
-  display: flex;
+.quantity-controls {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  background-color: #faf7f2;
+  border-radius: 10px;
+  padding: 6px;
 }
 
-.quantity button {
-  background: #fdc913;
-  border: none;
-  width: 40px;
-  height: 40px;
-  font-size: 1.2rem;
+.quantity-btn,
+.quantity-display {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.quantity-btn {
   cursor: pointer;
-  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
-.quantity span {
-  font-size: 1.2rem;
-  font-weight: bold;
+.quantity-btn:hover:not(:disabled) {
+  background-color: #f0f0f0;
 }
 
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sağ kart */
 .order-summary {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 6px;
-  background: #fffaf6;
-  font-size: 0.9rem;
+  flex: 1;
+  background-color: #faf7f2;
+  border-radius: 8px;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.order-summary .total {
-  color: #ce2829;
-  font-weight: bold;
+.order-summary h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.selections-price {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.total-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #d63031;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .btn-submit {
-  width: 100%;
-  background: #fdc913;
+  display: block;
+  width: calc(100% + 40px);
+  margin: 0 -20px -20px -20px;
+  height: 56px;
+  background-color: #fdc913;
+  color: #000;
   border: none;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 6px;
+  border-radius: 0 0 8px 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.3s ease;
+  transition: background-color 0.2s;
 }
 
 .btn-submit:hover {
-  background: #ffdb4d;
+  background-color: #e6b405;
 }
 
-.error {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: 0.3rem;
+/* ==== Hatalar ==== */
+.error-message {
+  color: #d63031;
+  font-size: 12px;
+  margin-top: 5px;
 }

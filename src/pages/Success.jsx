@@ -1,72 +1,45 @@
-import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import "../styles/success.css";
+import Header from "../components/Header";
 
-export default function Success() {
-  const location = useLocation();
-  const order = location.state?.order;
-
-  if (!order) {
-    return (
-      <>
-        <section className="success-page">
-        <Header />
-          <p style={{ marginTop: 12 }}>Geçerli sipariş bulunamadı.</p>
-          <Link to="/" className="btn-back" style={{ marginTop: 20 }}>
-            Anasayfa
-          </Link>
-        </section>
-        <Footer />
-      </>
-    );
+export default function Success({ orderData }) {
+  if (!orderData) {
+    return <p>Geçerli sipariş bulunamadı.</p>;
   }
 
-  const {
-    product, name, size, dough, toppings, quantity,
-    basePrice, extrasCost, total, note
-  } = order;
-
   return (
-    <>
-      <section className="success-page">
+    <div className="success-page">
         <Header />
-        <p className="success-tagline">lezzetin yolda</p>
-        <h2 className="success-title">SİPARİŞ ALINDI</h2>
-        <hr className="success-hr" />
 
-        <div className="success-details">
-          <h3 className="pizza-title">{product}</h3>
+      <p className="success-tagline">lezzetin geleceği</p>
+      <h2 className="success-title">SİPARİŞİNİZ ALINDI</h2>
+      <hr className="success-hr" />
 
-          <div className="kv"><span>İsim:</span><b>{name}</b></div>
-          <div className="kv"><span>Boyut:</span><b>{size}</b></div>
-          <div className="kv"><span>Hamur:</span><b>{dough}</b></div>
-          <div className="kv" style={{ alignItems: "flex-start" }}>
-            <span>Ek Malzemeler:</span>
-            <b>{toppings.join(", ") || "—"}</b>
+      <div className="success-details">
+        <h3 className="pizza-title">Position Absolute Acı Pizza</h3>
+
+        <div className="success-box">
+          <div className="row">
+            <span>Boyut:</span>
+            <span>{orderData.size}</span>
           </div>
-          {note && (
-            <div className="kv" style={{ alignItems: "flex-start" }}>
-              <span>Not:</span><b>{note}</b>
-            </div>
-          )}
-          <div className="kv"><span>Adet:</span><b>{quantity}</b></div>
-
-          <div className="success-box">
-            <div className="row">
-              <span>Seçimler</span>
-              <span>{extrasCost.toFixed(2)}₺</span>
-            </div>
-            <div className="row">
-              <span>Toplam</span>
-              <span className="total">{total.toFixed(2)}₺</span>
-            </div>
+          <div className="row">
+            <span>Hamur:</span>
+            <span>{orderData.hamur}</span>
+          </div>
+          <div className="row">
+            <span>Ek Malzemeler:</span>
+            <span>{orderData.toppings.join(", ")}</span>
+          </div>
+          <div className="row">
+            <span>Adet:</span>
+            <span>{orderData.quantity}</span>
+          </div>
+          <div className="row total">
+            <span>Toplam:</span>
+            <span>{orderData.totalPrice}₺</span>
           </div>
         </div>
-      </section>
-
-      <Footer />
-    </>
+      </div>
+    </div>
   );
 }
