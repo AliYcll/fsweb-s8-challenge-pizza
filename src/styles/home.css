@@ -504,6 +504,18 @@ body {
   .hero-mobile-title { display: none; }
   .hero-desktop-title { display: block; }
   
+.category {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  transition: background-color 0.2s ease;
+}
+
+.category:hover {
+  background-color: #f0f0f0;
+}
 
   .categories {
     grid-template-columns: repeat(6, 1fr);

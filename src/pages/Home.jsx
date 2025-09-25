@@ -20,6 +20,40 @@ export default function Home() {
           <Link to="/order" className="btn-primary">ACIKTIM</Link>
         </div>
       </section>
+      {/* CATEGORIES */}
+      <section className="categories">
+        <div className="categories-inner">
+          <Link to="/" className="category">
+            <img src="/images/iteration-2-images/icons/kore.svg" alt="Kore" />
+            <span>YENİ! Kore</span>
+          </Link>
+
+          <Link to="/order" className="category">
+            <img src="/images/iteration-2-images/icons/pizza.svg" alt="Pizza" />
+            <span>Pizza</span>
+          </Link>
+
+          <Link to="/" className="category">
+            <img src="/images/iteration-2-images/icons/burger.svg" alt="Burger" />
+            <span>Burger</span>
+          </Link>
+
+          <Link to="/" className="category">
+            <img src="/images/iteration-2-images/icons/kizartma.svg" alt="Kızartmalar" />
+            <span>Kızartmalar</span>
+          </Link>
+
+          <Link to="/" className="category">
+            <img src="/images/iteration-2-images/icons/fastfood.svg" alt="Fast food" />
+            <span>Fast food</span>
+          </Link>
+
+          <Link to="/" className="category">
+            <img src="/images/iteration-2-images/icons/gazli.svg" alt="Gazlı İçecek" />
+            <span>Gazlı İçecek</span>
+          </Link>
+        </div>
+      </section>
 
       {/* CAMPAIGNS */}
       <section className="campaigns">
