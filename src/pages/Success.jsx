@@ -1,5 +1,7 @@
 import "../styles/success.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 
 export default function Success({ orderData }) {
   if (!orderData) {
@@ -40,6 +42,8 @@ export default function Success({ orderData }) {
           </div>
         </div>
       </div>
+        <Footer />
+
     </div>
   );
 }

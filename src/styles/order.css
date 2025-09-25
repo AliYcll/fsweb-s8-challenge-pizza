@@ -1,22 +1,10 @@
-/* ==== Order Header ==== */
-.order-header {
-  width: 100%;
-  background-color: #ce2829;
-  color: white;
-  padding: 1rem 1rem;
-  margin: 0;
-  text-align: center;
-  font-weight: 400;
-  font-size: 3rem;
-  font-family: "Londrina Solid", sans-serif;
-}
-
-/* ==== Genel Wrapper ==== */
 .order-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden; /* mobilde sağda boşluk/kayma önler */
 }
 
 .order-image {
@@ -29,6 +17,7 @@
 
 .order-image img {
   width: 40%;
+  max-width: 300px;
   margin-bottom: 50px;
 }
 
@@ -42,7 +31,7 @@
 
 /* ==== Breadcrumb ==== */
 .order-breadcrumb {
-  width: 30%;
+  max-width: 90%;
   font-family: Barlow, sans-serif;
   font-size: 1rem;
   font-weight: 500;
@@ -63,7 +52,7 @@
 
 /* ==== Başlık & İçerik ==== */
 .order-heading {
-  width: 30%;
+  max-width: 90%;
   margin: auto;
 }
 
@@ -82,14 +71,16 @@
   color: #555;
   text-align: left;
   margin: 40px auto;
-  line-height: 2rem;
+  line-height: 1.6rem;
+  max-width: 90%;
 }
 
 /* ==== Form ==== */
 .order-form {
   max-width: 600px;
-  margin: 50px auto;
-  padding: 2rem;
+  width: 95%;
+  margin: 30px auto;
+  padding: 1.5rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
@@ -106,8 +97,15 @@
 /* ==== Boyut & Hamur ==== */
 .order-size-dough {
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 20px;
   margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .order-size-dough {
+    flex-direction: row;
+  }
 }
 
 .order-size,
@@ -173,7 +171,7 @@
 
 .toppings-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 12px;
 }
 
@@ -190,8 +188,8 @@
 .topping-option input {
   appearance: none;
   -webkit-appearance: none;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: 2px solid #ddd;
   border-radius: 6px;
   background-color: #faf7f2;
@@ -211,7 +209,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -55%);
-  font-size: 16px;
+  font-size: 14px;
   color: black;
   font-weight: bold;
 }
@@ -236,10 +234,17 @@
 /* ==== Footer (Miktar + Toplam) ==== */
 .order-footer {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 20px;
   margin: 30px 0;
+}
+
+@media (min-width: 768px) {
+  .order-footer {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 }
 
 .quantity-controls {
@@ -280,7 +285,6 @@
   cursor: not-allowed;
 }
 
-/* Sağ kart */
 .order-summary {
   flex: 1;
   background-color: #faf7f2;
@@ -298,7 +302,7 @@
   color: #333;
 }
 
-.selections-price {
+.summary-row {
   font-size: 14px;
   color: #333;
   display: flex;
@@ -306,19 +310,16 @@
   margin: 10px 0;
 }
 
-.total-price {
+.summary-row.total {
   font-size: 16px;
   font-weight: 700;
   color: #d63031;
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .btn-submit {
   display: block;
-  width: calc(100% + 40px);
-  margin: 0 -20px -20px -20px;
+  width: 100%;
   height: 56px;
   background-color: #fdc913;
   color: #000;

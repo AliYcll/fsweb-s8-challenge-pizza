@@ -1,14 +1,14 @@
 .header {
   background-color: var(--red);
-  padding: 16px 0;
+  padding: 1rem;
 }
 
 .header-inner {
-  max-width: 900px;   /* içerik genişliği ile eşitle */
-  margin: 0 auto;     /* ortala */
+  max-width: 900px;  
+  margin: 0 auto;    
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* sola hizala */
+  align-items: center;
   color: white;
 }
 
@@ -22,7 +22,11 @@
 .breadcrumb {
   margin-top: 4px;
   font-size: 14px;
+  display: flex;
+  justify-content: center; 
+  gap: 4px;              
 }
+
 
 .breadcrumb a {
   color: var(--yellow);

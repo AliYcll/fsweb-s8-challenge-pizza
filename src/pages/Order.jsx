@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Header from "../components/Header";
-
 import "../styles/order.css";
 
 export default function Order({ setOrderData }) {
@@ -78,7 +77,7 @@ export default function Order({ setOrderData }) {
         <section className="order-details">
           <nav className="order-breadcrumb">
             <Link to="/">Anasayfa - </Link>
-            <HashLink smooth to="/#foods">Seçenekler -</HashLink>
+            <Link to="/">Seçenekler -</Link>
             <span aria-current="page"> Sipariş Oluştur</span>
           </nav>
 

@@ -1,0 +1,102 @@
+.footer {
+  background-color: #1e1e1e;
+  color: white;
+  font-family: var(--font-barlow);
+  width: 100%;
+  margin-top: 1rem;
+  padding: 2rem 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.footer-logo {
+  width: 160px;
+  margin-bottom: 1rem;
+}
+
+.footer-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-info li {
+  display: flex;
+  align-items: center;
+  margin-bottom: .8rem;
+  font-size: .8rem;
+}
+
+.footer-info li img {
+  width: 20px;
+  margin-right: .8rem;
+}
+
+.footer-menu h4,
+.footer-insta h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu ul li {
+  margin-bottom: .6rem;
+  font-size: .9rem;
+}
+
+.footer-insta .insta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  gap: 0.3rem;
+  justify-content: start;
+}
+
+.footer-insta .insta-grid img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: .8rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ===========================
+   MASAÜSTÜ TASARIM (>=1024px)
+   =========================== */
+@media (min-width: 1024px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .footer-left,
+  .footer-menu,
+  .footer-insta {
+    flex: 1;
+  }
+
+  .footer-bottom {
+    margin-left: 0;
+  }
+}
