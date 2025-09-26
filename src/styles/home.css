@@ -30,7 +30,7 @@ img, video {
 
 body {
   margin: 0;
-  font-family: var(--font-roboto);
+  font-family: 'Roboto Condensed';
   background-color: var(--beige);
 }
 
@@ -63,7 +63,7 @@ body {
 }
 
 .hero-mobile-title {
-  font-family: var(--font-roboto);
+  font-family: 'Roboto Condensed';
   font-weight: 100;
   font-size: 4rem;
   letter-spacing: 2px;
@@ -73,9 +73,9 @@ body {
 }
 
 .hero-desktop-title {
-  font-family: var(--font-roboto);
+  font-family: 'Roboto Condensed';
   font-weight: 100;
-  font-size: 2.4rem;
+  font-size: 4rem;
   letter-spacing: 1px;
   margin: 0 0 2rem 0;
   line-height: 1.2;
@@ -199,7 +199,7 @@ body {
 .campaign h3 {
   font-size: 1.4rem;
   margin-bottom: .5rem;
-  font-family: var(--font-roboto);
+  font-family: 'Roboto Condensed';
 }
 
 .campaign p {
@@ -231,7 +231,7 @@ body {
 }
 
 .menus-title-mobile {
-  font-family: var(--font-roboto);
+  font-family: 'Roboto Condensed';
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 2px;
@@ -527,7 +527,7 @@ body {
 
   .menus-title-pc {
     display: block;
-    font-family: var(--font-roboto);
+    font-family: 'Roboto Condensed';
     font-size: 2rem;
     font-weight: bold;
     letter-spacing: 2px;

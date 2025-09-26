@@ -45,7 +45,7 @@
 }
 
 .pizza-title {
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
   font-size: 1.3rem;
   margin: auto;
@@ -60,18 +60,19 @@
 .order-summary-outside p {
   margin: 8px 0;
   font-size: 16px;
-  font-weight: 300;
+  font-family: 'Roboto Condensed';
+  font-weight: 500;
 }
 
 .order-summary-outside p strong {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .success-box {
   margin: 16px auto 50px auto;
   border: 1px solid rgba(255,255,255,.6);
   border-radius: 6px;
-  padding: 20px;
+  padding: 40px;
   width: 100%;
   max-width: 300px;
   box-sizing: border-box;
@@ -79,7 +80,7 @@
 
 .success-box h3 {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     margin: 0 0 15px 0;
 }
 
