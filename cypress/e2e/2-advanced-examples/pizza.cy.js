@@ -7,8 +7,8 @@ describe('Pizza Order Form', () => {
   it('should allow typing a name', () => {
     // İsim inputunu bul ve bir isim yaz
     cy.get('.name-input')
-      .type('Onur Yurt')
-      .should('have.value', 'Onur Yurt');
+      .type('Ali Yücel')
+      .should('have.value', 'Ali Yücel');
   });
 
   it('should allow selecting multiple toppings', () => {
