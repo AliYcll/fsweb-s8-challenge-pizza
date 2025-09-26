@@ -12,44 +12,27 @@ export default function Success({ orderData }) {
     <div className="success-page">
         <Header />
 
-      <p className="success-tagline">lezzetin geleceği</p>
-      <h2 className="success-title">SİPARİŞİNİZ ALINDI</h2>
+      <p className="success-tagline">lezzetin yolda</p>
+      <h2 className="success-title">SİPARİŞ ALINDI</h2>
       <hr className="success-hr" />
 
       <div className="success-details">
         <h3 className="pizza-title">Position Absolute Acı Pizza</h3>
 
-        <div class="success-box">
-          {orderData.name && (
-            <div class="row">
-              <span>Ad Soyad:</span>
-              <span>{orderData.name}</span>
-            </div>
-          )}
-          <div class="row">
-            <span>Boyut:</span>
-            <span>{orderData.size}</span>
+        <div className="order-summary-outside">
+          <p>Boyut: <strong>{orderData.size}</strong></p>
+          <p>Hamur: <strong>{orderData.hamur}</strong></p>
+          <p>Ek Malzemeler: <strong>{orderData.toppings.join(", ")}</strong></p>
+        </div>
+
+        <div className="success-box">
+          <h3>Sipariş Toplamı</h3>
+          <div className="row">
+            <span>Seçimler</span>
+            <span>{(orderData.toppings.length * 5).toFixed(2)}₺</span>
           </div>
           <div className="row">
-            <span>Hamur:</span>
-            <span>{orderData.hamur}</span>
-          </div>
-          <div className="row">
-            <span>Ek Malzemeler:</span>
-            <span>{orderData.toppings.join(", ")}</span>
-          </div>
-          <div className="row">
-            <span>Adet:</span>
-            <span>{orderData.quantity}</span>
-          </div>
-          {orderData.notes && (
-            <div className="row">
-              <span>Sipariş Notu:</span>
-              <span>{orderData.notes}</span>
-            </div>
-          )}
-          <div className="row total">
-            <span>Toplam:</span>
+            <span>Toplam</span>
             <span>{orderData.totalPrice}₺</span>
           </div>
         </div>

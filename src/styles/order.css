@@ -193,7 +193,8 @@
 
 .toppings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+
   gap: 12px;
 }
 
@@ -201,7 +202,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: #333;
   cursor: pointer;
@@ -210,8 +211,8 @@
 .topping-option input {
   appearance: none;
   -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   border: 2px solid #ddd;
   border-radius: 6px;
   background-color: #faf7f2;

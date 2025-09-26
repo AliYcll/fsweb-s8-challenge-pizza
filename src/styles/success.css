@@ -47,33 +47,50 @@
 .pizza-title {
   font-weight: 700;
   text-align: center;
-  margin: 12px 0 14px;
+  font-size: 1.3rem;
+  margin: auto;
+}
+
+.order-summary-outside {
+  width: 100%;
+  max-width: 200px;
+  margin: 50px auto;
+}
+
+.order-summary-outside p {
+  margin: 8px 0;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.order-summary-outside p strong {
+  font-weight: 700;
 }
 
 .success-box {
-  margin-top: 16px;
-  margin-bottom: 50px;
+  margin: 16px auto 50px auto;
   border: 1px solid rgba(255,255,255,.6);
   border-radius: 6px;
-  padding: 18px 22px;
+  padding: 20px;
   width: 100%;
-  max-width: 420px;   /* taşmayı engellemek için */
-  box-sizing: border-box; /* padding + border genişliği hesaplasın */
+  max-width: 300px;
+  box-sizing: border-box;
 }
 
-/* satırları alt alta göster */
+.success-box h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+}
+
 .row {
-  display: block;   
-  margin: 6px 0;
+  display: flex; /* Değiştirildi: flex ile daha iyi kontrol */
+  justify-content: space-between; /* Öğeleri iki yana yasla */
+  margin: 10px 0;
+  font-size: 16px;
 }
 
 .row span:first-child {
-  font-weight: 600;
-  margin-right: 6px;
+  font-weight: 400; /* Normal kalınlık */
 }
 
-.total {
-  color: var(--yellow);
-  font-weight: 700;
-  text-align: right; /* toplam sağa yaslansın */
-}
