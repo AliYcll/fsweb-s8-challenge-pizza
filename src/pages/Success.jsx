@@ -19,8 +19,14 @@ export default function Success({ orderData }) {
       <div className="success-details">
         <h3 className="pizza-title">Position Absolute Acı Pizza</h3>
 
-        <div className="success-box">
-          <div className="row">
+        <div class="success-box">
+          {orderData.name && (
+            <div class="row">
+              <span>Ad Soyad:</span>
+              <span>{orderData.name}</span>
+            </div>
+          )}
+          <div class="row">
             <span>Boyut:</span>
             <span>{orderData.size}</span>
           </div>
@@ -36,6 +42,12 @@ export default function Success({ orderData }) {
             <span>Adet:</span>
             <span>{orderData.quantity}</span>
           </div>
+          {orderData.notes && (
+            <div className="row">
+              <span>Sipariş Notu:</span>
+              <span>{orderData.notes}</span>
+            </div>
+          )}
           <div className="row total">
             <span>Toplam:</span>
             <span>{orderData.totalPrice}₺</span>

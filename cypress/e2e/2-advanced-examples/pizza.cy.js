@@ -26,7 +26,7 @@ describe('Pizza Order Form', () => {
   it('should fill the form, submit, and navigate to success page', () => {
     // Adım 1: Formu doldur
     cy.get('.name-input').type('Ahmet Kaya');
-    cy.get('.radio-group input[value="M"]').check();
+    cy.get('.radio-group input[value="M"]').parent('label').click();
     cy.get('.dough-select').select('ince');
     cy.get('.toppings-grid input[type="checkbox"]').eq(0).check();
     cy.get('.toppings-grid input[type="checkbox"]').eq(2).check();
