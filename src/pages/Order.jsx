@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
+import axios from "axios"; // EKLENDİ
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/order.css";
@@ -13,11 +13,12 @@ export default function Order({ setOrderData }) {
   const toppingPrice = 5;
 
   const toppingsList = [
-    "Pepperoni","Sosis","Kanada Jambonu","Tavuk Izgara","Soğan","Domates",
-    "Mısır","Jalepeno","Sucuk","Ananas","Kabak"
+    "Pepperoni", "Sosis", "Kanada Jambonu", "Tavuk Izgara", "Soğan", "Domates",
+    "Mısır", "Jalepeno", "Sucuk", "Ananas", "Kabak"
   ];
 
   const [formData, setFormData] = useState({
+    name: "",
     size: "",
     hamur: "",
     toppings: [],
@@ -27,6 +28,7 @@ export default function Order({ setOrderData }) {
 
   const [errors, setErrors] = useState({});
   const [totalPrice, setTotalPrice] = useState(basePrice);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const total =
@@ -34,27 +36,51 @@ export default function Order({ setOrderData }) {
     setTotalPrice(total);
   }, [formData.toppings, formData.quantity]);
 
+  useEffect(() => {
+    const validationErrors = {};
+    if (formData.name.length < 3) {
+      validationErrors.name = "İsim en az 3 karakter olmalıdır";
+    }
+    if (!formData.size) {
+      validationErrors.size = "Pizza boyutu seçin";
+    }
+    if (!formData.hamur) {
+      validationErrors.hamur = "Hamur kalınlığı seçin";
+    }
+    if (formData.toppings.length < 4 || formData.toppings.length > 10) {
+      validationErrors.toppings = "4 ile 10 arasında malzeme seçmelisiniz";
+    }
+    
+    setErrors(validationErrors);
+    setIsFormValid(Object.keys(validationErrors).length === 0);
+  }, [formData]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = {};
-
-    if (!formData.size) validationErrors.size = "Pizza boyutu seçin";
-    if (!formData.hamur) validationErrors.hamur = "Hamur kalınlığı seçin";
-    if (formData.toppings.length < 4 || formData.toppings.length > 10)
-      validationErrors.toppings = "4 ile 10 arasında malzeme seçmelisiniz";
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    if (!isFormValid) {
+      console.error("Form geçerli değil!");
       return;
     }
 
-    const response = {
+    const orderPayload = {
       ...formData,
       totalPrice: totalPrice.toFixed(2),
-      id: Math.floor(Math.random() * 1000),
     };
-    setOrderData(response);
-    history.push("/success");
+
+    axios.post("https://reqres.in/api/pizza", orderPayload, {
+      headers: {
+        'x-api-key': 'reqres-free-v1'
+      }
+    })
+      .then(response => {
+        console.log("API Yanıtı:", response.data);
+        setOrderData(response.data); // API'den gelen yanıtı Success sayfasına gönder
+        history.push("/success");
+      })
+      .catch(error => {
+        console.error("API Hatası:", error);
+        alert(`Sipariş gönderilirken bir hata oluştu: ${error.message}`);
+      });
   };
 
   const handleQuantityChange = (operation) => {
@@ -64,15 +90,18 @@ export default function Order({ setOrderData }) {
       setFormData({ ...formData, quantity: formData.quantity - 1 });
     }
   };
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
     <>
-        <Header />
-
-
+      <Header />
       <main className="order-wrapper">
         <section className="order-image">
-          <img src="images/iteration-2-images/pictures/form-banner.png" alt="pizza" />
+          <img src="/images/iteration-2-images/pictures/form-banner.png" alt="pizza" />
         </section>
 
         <section className="order-details">
@@ -103,7 +132,6 @@ export default function Order({ setOrderData }) {
 
         <section className="order-form">
           <form onSubmit={handleSubmit}>
-            {/* Boyut ve Hamur */}
             <div className="order-size-dough">
               <div className="order-size">
                 <h3 className="field-title">
@@ -117,9 +145,7 @@ export default function Order({ setOrderData }) {
                         name="size"
                         value={size}
                         checked={formData.size === size}
-                        onChange={(e) =>
-                          setFormData({ ...formData, size: e.target.value })
-                        }
+                        onChange={handleInputChange}
                       />
                       <span>{size}</span>
                     </label>
@@ -134,10 +160,9 @@ export default function Order({ setOrderData }) {
                 </h3>
                 <select
                   className="dough-select"
+                  name="hamur"
                   value={formData.hamur}
-                  onChange={(e) =>
-                    setFormData({ ...formData, hamur: e.target.value })
-                  }
+                  onChange={handleInputChange}
                 >
                   <option value="">-- Hamur Kalınlığı Seç --</option>
                   <option value="ince">İnce Hamur</option>
@@ -148,7 +173,6 @@ export default function Order({ setOrderData }) {
               </div>
             </div>
 
-            {/* Ek Malzemeler */}
             <div className="order-toppings">
               <h3 className="field-title">Ek Malzemeler</h3>
               <p className="toppings-info">En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
@@ -173,21 +197,31 @@ export default function Order({ setOrderData }) {
                 <div className="error-message">{errors.toppings}</div>
               )}
             </div>
+            
+            <div className="order-name">
+                <h3 className="field-title">Ad Soyad <span className="required">*</span></h3>
+                <input
+                    className="name-input"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Adınız Soyadınız"
+                />
+                {errors.name && <div className="error-message">{errors.name}</div>}
+            </div>
 
-            {/* Sipariş Notu */}
             <div className="order-notes">
               <h3 className="field-title">Sipariş Notu</h3>
               <textarea
                 className="notes-input"
+                name="notes"
                 placeholder="Siparişine eklemek istediğin bir not var mı?"
                 value={formData.notes}
-                onChange={(e) =>
-                  setFormData({ ...formData, notes: e.target.value })
-                }
+                onChange={handleInputChange}
               />
             </div>
 
-            {/* Miktar ve Toplam */}
             <div className="order-footer">
               <div className="quantity-controls">
                 <button
@@ -225,7 +259,7 @@ export default function Order({ setOrderData }) {
                   <span>{totalPrice.toFixed(2)}₺</span>
                 </div>
 
-                <button type="submit" className="btn-submit">
+                <button type="submit" className="btn-submit" disabled={!isFormValid}>
                   SİPARİŞ VER
                 </button>
               </div>
@@ -233,8 +267,7 @@ export default function Order({ setOrderData }) {
           </form>
         </section>
       </main>
-              <Footer />
-      
+      <Footer />
     </>
   );
 }
