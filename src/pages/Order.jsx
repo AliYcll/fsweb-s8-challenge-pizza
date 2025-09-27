@@ -19,10 +19,9 @@ export default function Order({ setOrderData }) {
     "Sosis",
     "Mısır",
     "Sucuk",
-    "Kanada Jambonu",
-    "Sucuk",
-    "Ananas",
-    "Tavuk Izgara",
+      "Kanada Jambonu",
+      "Salam",
+      "Mantar",    "Tavuk Izgara",
     "Jalepeno",
     "Kabak",
     "Soğan",
@@ -40,7 +39,6 @@ export default function Order({ setOrderData }) {
 
   const [errors, setErrors] = useState({});
   const [totalPrice, setTotalPrice] = useState(basePrice);
-  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const total =
@@ -48,7 +46,9 @@ export default function Order({ setOrderData }) {
     setTotalPrice(total);
   }, [formData.toppings, formData.quantity]);
 
-  useEffect(() => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     const validationErrors = {};
     if (formData.name.length < 3) {
       validationErrors.name = "İsim en az 3 karakter olmalıdır";
@@ -62,13 +62,9 @@ export default function Order({ setOrderData }) {
     if (formData.toppings.length < 4 || formData.toppings.length > 10) {
       validationErrors.toppings = "4 ile 10 arasında malzeme seçmelisiniz";
     }
+    setErrors(validationErrors);
     
-    setIsFormValid(Object.keys(validationErrors).length === 0);
-  }, [formData]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!isFormValid) {
+    if (Object.keys(validationErrors).length > 0) {
       console.error("Form geçerli değil!");
       return;
     }
@@ -271,7 +267,7 @@ export default function Order({ setOrderData }) {
                   <span>{totalPrice.toFixed(2)}₺</span>
                 </div>
 
-                <button type="submit" className="btn-submit" disabled={!isFormValid}>
+                <button type="submit" className="btn-submit">
                   SİPARİŞ VER
                 </button>
               </div>
