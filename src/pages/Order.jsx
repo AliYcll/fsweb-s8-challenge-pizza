@@ -191,9 +191,9 @@ export default function Order({ setOrderData }) {
                   onChange={handleInputChange}
                 >
                   <option value="">-- Hamur Kalınlığı Seç --</option>
-                  <option value="ince">İnce Hamur</option>
-                  <option value="orta">Orta Hamur</option>
-                  <option value="kalin">Kalın Hamur</option>
+                  <option value="İnce">İnce Hamur</option>
+                  <option value="Orta">Orta Hamur</option>
+                  <option value="Kalın">Kalın Hamur</option>
                 </select>
                 {errors.hamur && <div className="error-message">{errors.hamur}</div>}
               </div>

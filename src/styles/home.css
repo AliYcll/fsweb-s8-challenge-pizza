@@ -111,7 +111,7 @@ body {
   gap: .8rem;
   font-family: var(--font-barlow);
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   color: var(--dark-gray);
 }
 
