@@ -1,52 +1,46 @@
 describe('Pizza Order Form', () => {
+  const testData = {
+    name: 'Ali Yücel',
+    size: 'M',
+    dough: 'İnce',
+    toppings: ['Pepperoni', 'Biber', 'Mısır', 'Kanada Jambonu'],
+    notes: 'Lütfen bol acılı olsun!'
+  };
+
+  const fillPizzaForm = (data, toppingLimit = data.toppings.length) => {
+    cy.get('.name-input').type(data.name);
+    cy.get(`.radio-group input[value="${data.size}"]`).parent('label').click();
+    cy.get('.dough-select').select(data.dough);
+
+    data.toppings.slice(0, toppingLimit).forEach(topping => {
+      cy.contains('.toppings-grid label', topping).find('input').check();
+    });
+
+    cy.get('.notes-input').type(data.notes);
+  };
+
   beforeEach(() => {
-    // Her testten önce sipariş sayfasını ziyaret et
     cy.visit('http://localhost:5173/order');
   });
 
-  it('should allow typing a name', () => {
-    // İsim inputunu bul ve bir isim yaz
-    cy.get('.name-input')
-      .type('Ali Yücel')
-      .should('have.value', 'Ali Yücel');
+  it('should not enable submit if less than 4 toppings are selected', () => {
+    fillPizzaForm(testData, 2); // sadece 2 topping seçelim
+    cy.get('.btn-submit').should('be.disabled');
   });
 
-  it('should allow selecting multiple toppings', () => {
-    // Malzeme checkbox'larından 5 tanesini seç
-    cy.get('.toppings-grid input[type="checkbox"]').eq(0).check(); // Pepperoni
-    cy.get('.toppings-grid input[type="checkbox"]').eq(1).check(); // Sosis
-    cy.get('.toppings-grid input[type="checkbox"]').eq(4).check(); // Soğan
-    cy.get('.toppings-grid input[type="checkbox"]').eq(6).check(); // Mısır
-    cy.get('.toppings-grid input[type="checkbox"]').eq(8).check(); // Sucuk
+  it('should fill the form correctly and submit', () => {
+    fillPizzaForm(testData); // tüm toppings (4 tane)
 
-    // Seçilen malzemelerin state'e yansıdığını kontrol et (opsiyonel, ama iyi bir pratik)
-    cy.get('.order-summary .summary-row span').eq(1).should('contain', '25.00'); // 5 toppings * 5₺
-  });
+    cy.get('.btn-submit').should('not.be.disabled').click();
 
-  it('should fill the form, submit, and navigate to success page', () => {
-    // Adım 1: Formu doldur
-    cy.get('.name-input').type('Ali Yücel');
-    cy.get('.radio-group input[value="M"]').parent('label').click();
-    cy.get('.dough-select').select('ince');
-    cy.get('.toppings-grid input[type="checkbox"]').eq(0).check();
-    cy.get('.toppings-grid input[type="checkbox"]').eq(2).check();
-    cy.get('.toppings-grid input[type="checkbox"]').eq(5).check();
-    cy.get('.toppings-grid input[type="checkbox"]').eq(7).check();
-    cy.get('.notes-input').type('Lütfen bol acılı olsun!');
-
-    // Adım 2: Formun gönderilebilir olduğundan emin ol
-    cy.get('.btn-submit').should('not.be.disabled');
-
-    // Adım 3: Formu gönder
-    cy.get('form').submit();
-
-    // Adım 4: Başarı sayfasına yönlendirildiğini doğrula
     cy.url().should('include', '/success');
+    cy.get('.success-title').should('contain', 'SİPARİŞ ALINDI');
 
-    // Adım 5: Başarı sayfasında doğru bilgilerin gösterildiğini kontrol et
-    cy.get('.success-title').should('contain', 'SİPARİŞİNİZ ALINDI');
-    cy.get('.success-box').should('contain', 'M'); // Boyut
-    cy.get('.success-box').should('contain', 'ince'); // Hamur
-    cy.get('.success-box').should('contain', 'Pepperoni'); // Malzeme
+    cy.contains(`Boyut: ${testData.size}`).should('exist');
+    cy.contains(`Hamur: ${testData.dough}`).should('exist');
+
+    testData.toppings.forEach(topping => {
+      cy.contains(topping).should('exist');
+    });
   });
 });

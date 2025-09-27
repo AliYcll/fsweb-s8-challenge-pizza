@@ -63,7 +63,6 @@ export default function Order({ setOrderData }) {
       validationErrors.toppings = "4 ile 10 arasında malzeme seçmelisiniz";
     }
     
-    setErrors(validationErrors);
     setIsFormValid(Object.keys(validationErrors).length === 0);
   }, [formData]);
 
