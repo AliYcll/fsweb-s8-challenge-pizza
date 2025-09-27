@@ -477,30 +477,7 @@ body {
   }
 }
 
-@media (max-width: 480px) {
-  .product-card,
-  .campaign {
-    width: 100%;
-    min-width: unset;
-    max-width: 100%;
-  }
 
-  .campaigns {
-    width: 100%;
-  }
-
-  .hero,
-  .categories-inner,
-  .menus,
-  .products,
-  .menu-filters,
-  .popular {
-    width: 100%;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 
 @media (min-width: 1024px) {
   .hero-subtitle {
@@ -561,7 +538,7 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
-    width: 64vw;
+    width: 50%;
   }
 
   .campaign:nth-of-type(1) h3 {
