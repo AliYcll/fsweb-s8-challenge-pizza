@@ -113,6 +113,7 @@ body {
   font-size: 1rem;
   font-weight: 600;
   color: var(--dark-gray);
+  text-decoration: none;
 }
 
 .category img {
@@ -218,6 +219,69 @@ body {
   cursor: pointer;
 }
 
+.popular {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+}
+
+.popular-subtitle {
+  font-family: var(--font-satisfy);
+  font-size: 1.6rem;
+  color: var(--red);
+  margin: 0 0 .4rem;
+}
+
+.popular-title {
+  font-family: var(--font-barlow);
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: var(--dark-gray);
+  margin: 0 0 1.4rem;
+}
+
+.popular-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 16px;
+  justify-items: center;
+}
+
+.popular-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-family: var(--font-barlow);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--dark-gray);
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+  width: 90%;
+  max-width: 220px;
+}
+
+.popular-pill img {
+  width: 28px;
+  height: 28px;
+}
+
+.popular-pill:hover {
+  background: var(--dark-gray);
+  color: #fff;
+  border-color: var(--dark-gray);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+/*
+.popular-pill.disabled {
+  cursor: not-allowed;
+}
+*/
 .menus {
   text-align: center;
   padding: 2rem 1rem;
@@ -371,7 +435,6 @@ body {
 
   .product-card h4 {
     flex-shrink: 0;
-    margin-bottom: .5rem;
   }
 
   .product-info {
@@ -403,6 +466,15 @@ body {
     flex-direction: column;
     justify-content: center;
   }
+
+  .popular {
+    padding: 2rem 1rem;
+  }
+
+  .popular-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -421,7 +493,8 @@ body {
   .categories-inner,
   .menus,
   .products,
-  .menu-filters {
+  .menu-filters,
+  .popular {
     width: 100%;
     max-width: 100%;
     margin-left: auto;
@@ -497,6 +570,28 @@ body {
 
   .campaign.red.lezzetus {
     grid-row: span 2;
+  }
+
+  .popular {
+    width: 64vw;
+    margin: 0 auto;
+    padding: 2.5rem 0 2rem;
+  }
+
+  .popular-title {
+    font-size: 2.6rem;
+  }
+
+  .popular-options {
+    grid-template-columns: repeat(6, auto);
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .popular-pill {
+    width: auto;
+    max-width: none;
+    padding: 12px 18px;
   }
 
   .products {
