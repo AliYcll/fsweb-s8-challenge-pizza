@@ -446,7 +446,7 @@ body {
     flex-direction: column;
     padding: 1rem;
     width: 100%;
-    margin: 0 auto;
+    margin-top: 3rem;
     align-items: center;
   }
 
@@ -495,6 +495,7 @@ body {
   .hero {
     padding: 2rem 2rem 20rem 2rem;
     background-size: contain;
+    min-height: 100vh;
   }
 
   .hero .logo {
@@ -539,6 +540,7 @@ body {
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
     width: 50%;
+    margin-top: 3rem;
   }
 
   .campaign:nth-of-type(1) h3 {
