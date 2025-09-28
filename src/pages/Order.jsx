@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios"; // EKLENDİ
+import axios from "axios"; 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/order.css";
@@ -19,9 +19,10 @@ export default function Order({ setOrderData }) {
     "Sosis",
     "Mısır",
     "Sucuk",
-      "Kanada Jambonu",
-      "Salam",
-      "Mantar",    "Tavuk Izgara",
+    "Kanada Jambonu",
+    "Salam",
+    "Mantar",
+    "Tavuk Izgara",
     "Jalepeno",
     "Kabak",
     "Soğan",
